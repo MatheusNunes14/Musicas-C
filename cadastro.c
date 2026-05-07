@@ -80,7 +80,11 @@ int main() {
         }
 
         else if (opcao == 3) {
-            printf("Buscar\n");
+
+            int busca;
+            printf("ID: ");
+            scanf("%d", &busca);
+
         }
 
     } while (opcao != 0);
