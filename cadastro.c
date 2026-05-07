@@ -81,10 +81,38 @@ int main() {
 
         else if (opcao == 3) {
 
-            int busca;
+            int busca, encontrado = 0;
+
             printf("ID: ");
             scanf("%d", &busca);
 
+            for (int i = 0; i < qtd; i++) {
+                if (musicas[i].id == busca) {
+                    printf("Nome: %s\n", musicas[i].nome);
+                    encontrado = 1;
+                }
+            }
+
+            if (!encontrado) {
+                printf("Nao encontrada!\n");
+            }
+
+        }
+
+        else if (opcao == 4) {
+            printf("Atualizar\n");
+        }
+
+        else if (opcao == 5) {
+            printf("Remover\n");
+        }
+
+        else if (opcao == 0) {
+            printf("Saindo...\n");
+        }
+
+        else {
+            printf("Opcao invalida!\n");
         }
 
     } while (opcao != 0);
