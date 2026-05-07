@@ -79,6 +79,10 @@ int main() {
             }
         }
 
+        else if (opcao == 3) {
+            printf("Buscar\n");
+        }
+
     } while (opcao != 0);
 
     return 0;
