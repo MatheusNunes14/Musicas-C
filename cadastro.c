@@ -87,8 +87,14 @@ int main() {
             scanf("%d", &busca);
 
             for (int i = 0; i < qtd; i++) {
+
                 if (musicas[i].id == busca) {
+
+                    printf("\nID: %d\n", musicas[i].id);
                     printf("Nome: %s\n", musicas[i].nome);
+                    printf("Artista: %s\n", musicas[i].artista);
+                    printf("Duracao: %d\n", musicas[i].duracao);
+
                     encontrado = 1;
                 }
             }
@@ -100,7 +106,35 @@ int main() {
         }
 
         else if (opcao == 4) {
-            printf("Atualizar\n");
+
+            int busca, encontrado = 0;
+
+            printf("ID: ");
+            scanf("%d", &busca);
+
+            for (int i = 0; i < qtd; i++) {
+
+                if (musicas[i].id == busca) {
+
+                    printf("Novo nome: ");
+                    scanf(" %[^\n]", musicas[i].nome);
+
+                    printf("Novo artista: ");
+                    scanf(" %[^\n]", musicas[i].artista);
+
+                    printf("Nova duracao: ");
+                    scanf("%d", &musicas[i].duracao);
+
+                    printf("Atualizada!\n");
+
+                    encontrado = 1;
+                }
+            }
+
+            if (!encontrado) {
+                printf("ID nao encontrado!\n");
+            }
+
         }
 
         else if (opcao == 5) {
