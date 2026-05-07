@@ -27,23 +27,6 @@ int main() {
         printf("0 - Sair\n");
         printf("Escolha: ");
 
-        if (scanf("%d", &opcao) != 1) {
-            printf("Entrada invalida!\n");
-            while(getchar() != '\n');
-            opcao = -1;
-            continue;
-        }
-
-        if (opcao == 1) {
-
-            if (qtd >= 10) {
-                printf("Limite atingido!\n");
-                continue;
-            }
-
-            printf("Cadastrar musica\n");
-        }
-
     } while (opcao != 0);
 
     return 0;
