@@ -34,6 +34,16 @@ int main() {
             continue;
         }
 
+        if (opcao == 1) {
+
+            if (qtd >= 10) {
+                printf("Limite atingido!\n");
+                continue;
+            }
+
+            printf("Cadastrar musica\n");
+        }
+
     } while (opcao != 0);
 
     return 0;
