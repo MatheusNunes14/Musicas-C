@@ -41,11 +41,34 @@ int main() {
                 continue;
             }
 
-            int novoId;
+            int novoId, existe = 0;
 
             printf("ID: ");
             scanf("%d", &novoId);
 
+            for (int i = 0; i < qtd; i++) {
+                if (musicas[i].id == novoId) {
+                    existe = 1;
+                }
+            }
+
+            if (existe) {
+                printf("ID ja existe!\n");
+                continue;
+            }
+
+            musicas[qtd].id = novoId;
+
+            printf("Nome: ");
+            scanf(" %[^\n]", musicas[qtd].nome);
+
+            printf("Artista: ");
+            scanf(" %[^\n]", musicas[qtd].artista);
+
+            printf("Duracao: ");
+            scanf("%d", &musicas[qtd].duracao);
+
+            qtd++;
         }
 
     } while (opcao != 0);
