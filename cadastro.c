@@ -71,6 +71,14 @@ int main() {
             qtd++;
         }
 
+        else if (opcao == 2) {
+
+            for (int i = 0; i < qtd; i++) {
+                printf("\nID: %d\n", musicas[i].id);
+                printf("Nome: %s\n", musicas[i].nome);
+            }
+        }
+
     } while (opcao != 0);
 
     return 0;
