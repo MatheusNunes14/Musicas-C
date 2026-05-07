@@ -41,7 +41,11 @@ int main() {
                 continue;
             }
 
-            printf("Cadastrar musica\n");
+            int novoId;
+
+            printf("ID: ");
+            scanf("%d", &novoId);
+
         }
 
     } while (opcao != 0);
