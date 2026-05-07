@@ -27,6 +27,13 @@ int main() {
         printf("0 - Sair\n");
         printf("Escolha: ");
 
+        if (scanf("%d", &opcao) != 1) {
+            printf("Entrada invalida!\n");
+            while(getchar() != '\n');
+            opcao = -1;
+            continue;
+        }
+
     } while (opcao != 0);
 
     return 0;
