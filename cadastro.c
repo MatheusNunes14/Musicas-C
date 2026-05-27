@@ -138,7 +138,32 @@ int main() {
         }
 
         else if (opcao == 5) {
-            printf("Remover\n");
+
+            int busca, encontrado = 0;
+
+            printf("ID: ");
+            scanf("%d", &busca);
+
+            for (int i = 0; i < qtd; i++) {
+
+                if (musicas[i].id == busca) {
+
+                    for (int j = i; j < qtd - 1; j++) {
+                        musicas[j] = musicas[j + 1];
+                    }
+
+                    qtd--;
+
+                    printf("Removida!\n");
+
+                    encontrado = 1;
+                }
+            }
+
+            if (!encontrado) {
+                printf("ID nao encontrado!\n");
+            }
+
         }
 
         else if (opcao == 0) {
