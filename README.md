@@ -15,4 +15,5 @@ Como executar:
 Compile o programa:
 
 gcc cadastro.c -o app 
+
 ./app
