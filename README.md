@@ -17,3 +17,8 @@ Compile o programa:
 gcc cadastro.c -o app 
 
 ./app
+
+
+Feito por : Matheus Augusto Nunes Santos / Domingas Farias Moura Neta
+Matutino / MDC118
+            
