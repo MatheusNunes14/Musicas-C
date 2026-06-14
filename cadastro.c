@@ -44,7 +44,12 @@ int main() {
             int novoId, existe = 0;
 
             printf("ID: ");
-            scanf("%d", &novoId);
+
+            if (scanf("%d", &novoId) != 1 || novoId < 0) {
+                printf("ID invalido!\n");
+                while(getchar() != '\n');
+                continue;
+            }
 
             for (int i = 0; i < qtd; i++) {
                 if (musicas[i].id == novoId) {
@@ -66,20 +71,39 @@ int main() {
             scanf(" %[^\n]", musicas[qtd].artista);
 
             printf("Duracao: ");
-            scanf("%d", &musicas[qtd].duracao);
+
+            if (scanf("%d", &musicas[qtd].duracao) != 1 || musicas[qtd].duracao <= 0) {
+                printf("Duracao invalida!\n");
+                while(getchar() != '\n');
+                continue;
+            }
 
             qtd++;
+
+            printf("Cadastrada!\n");
         }
 
         else if (opcao == 2) {
 
+            if (qtd == 0) {
+                printf("Nenhuma musica cadastrada!\n");
+            }
+
             for (int i = 0; i < qtd; i++) {
+
                 printf("\nID: %d\n", musicas[i].id);
                 printf("Nome: %s\n", musicas[i].nome);
+                printf("Artista: %s\n", musicas[i].artista);
+                printf("Duracao: %d\n", musicas[i].duracao);
             }
         }
 
         else if (opcao == 3) {
+
+            if (qtd == 0) {
+                printf("Nenhuma musica cadastrada!\n");
+                continue;
+            }
 
             int busca, encontrado = 0;
 
@@ -107,6 +131,11 @@ int main() {
 
         else if (opcao == 4) {
 
+            if (qtd == 0) {
+                printf("Nenhuma musica cadastrada!\n");
+                continue;
+            }
+
             int busca, encontrado = 0;
 
             printf("ID: ");
@@ -123,9 +152,15 @@ int main() {
                     scanf(" %[^\n]", musicas[i].artista);
 
                     printf("Nova duracao: ");
-                    scanf("%d", &musicas[i].duracao);
 
-                    printf("Atualizada!\n");
+                    if (scanf("%d", &musicas[i].duracao) != 1 || musicas[i].duracao <= 0) {
+                        printf("Duracao invalida!\n");
+                        while(getchar() != '\n');
+                    }
+
+                    else {
+                        printf("Atualizada!\n");
+                    }
 
                     encontrado = 1;
                 }
@@ -138,6 +173,11 @@ int main() {
         }
 
         else if (opcao == 5) {
+
+            if (qtd == 0) {
+                printf("Nenhuma musica cadastrada!\n");
+                continue;
+            }
 
             int busca, encontrado = 0;
 
