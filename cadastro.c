@@ -19,6 +19,8 @@ int main() {
         printf("\n==============================\n");
         printf("       APP DE MUSICAS\n");
         printf("==============================\n");
+        printf("Musicas cadastradas: %d/10\n", qtd);
+        printf("------------------------------\n");
         printf("1 - Cadastrar musica\n");
         printf("2 - Listar musicas\n");
         printf("3 - Buscar musica\n");
@@ -37,64 +39,104 @@ int main() {
         if (opcao == 1) {
 
             if (qtd >= 10) {
-                printf("Limite atingido!\n");
+                printf("Limite de 10 musicas atingido!\n");
                 continue;
             }
 
-            int novoId, existe = 0;
+            int novoId;
+            int existe = 0;
 
-            printf("ID: ");
+            do {
 
-            if (scanf("%d", &novoId) != 1 || novoId < 0) {
-                printf("ID invalido!\n");
-                while(getchar() != '\n');
-                continue;
-            }
+                printf("ID (1 ate 9999): ");
+
+                if (scanf("%d", &novoId) != 1) {
+                    while(getchar() != '\n');
+                    novoId = -1;
+                }
+
+                if (novoId <= 0 || novoId > 9999) {
+                    printf("ID invalido! Digite um valor entre 1 e 9999.\n");
+                }
+
+            } while (novoId <= 0 || novoId > 9999);
 
             for (int i = 0; i < qtd; i++) {
+
                 if (musicas[i].id == novoId) {
                     existe = 1;
+                    break;
                 }
             }
 
             if (existe) {
-                printf("ID ja existe!\n");
+                printf("ID ja cadastrado!\n");
                 continue;
             }
 
             musicas[qtd].id = novoId;
 
-            printf("Nome: ");
-            scanf(" %[^\n]", musicas[qtd].nome);
+            do {
+                printf("Nome: ");
+                scanf(" %49[^\n]", musicas[qtd].nome);
 
-            printf("Artista: ");
-            scanf(" %[^\n]", musicas[qtd].artista);
+                if (strlen(musicas[qtd].nome) == 0) {
+                    printf("Nome nao pode ficar vazio!\n");
+                }
 
-            printf("Duracao: ");
+            } while (strlen(musicas[qtd].nome) == 0);
 
-            if (scanf("%d", &musicas[qtd].duracao) != 1 || musicas[qtd].duracao <= 0) {
-                printf("Duracao invalida!\n");
-                while(getchar() != '\n');
-                continue;
-            }
+            do {
+                printf("Artista: ");
+                scanf(" %49[^\n]", musicas[qtd].artista);
+
+                if (strlen(musicas[qtd].artista) == 0) {
+                    printf("Artista nao pode ficar vazio!\n");
+                }
+
+            } while (strlen(musicas[qtd].artista) == 0);
+
+            do {
+
+                printf("Duracao em segundos: ");
+
+                if (scanf("%d", &musicas[qtd].duracao) != 1) {
+                    while(getchar() != '\n');
+                    musicas[qtd].duracao = -1;
+                }
+
+                if (musicas[qtd].duracao <= 0) {
+                    printf("Duracao invalida! Digite apenas numeros positivos.\n");
+                }
+
+            } while (musicas[qtd].duracao <= 0);
 
             qtd++;
 
-            printf("Cadastrada!\n");
+            printf("Musica cadastrada com sucesso!\n");
         }
 
         else if (opcao == 2) {
 
             if (qtd == 0) {
                 printf("Nenhuma musica cadastrada!\n");
+                continue;
             }
+
+            printf("\n===== LISTA DE MUSICAS =====\n");
+            printf("Total: %d musica(s)\n", qtd);
 
             for (int i = 0; i < qtd; i++) {
 
-                printf("\nID: %d\n", musicas[i].id);
+                int min = musicas[i].duracao / 60;
+                int seg = musicas[i].duracao % 60;
+
+                printf("\n-------------------------\n");
+                printf("ID: %04d\n", musicas[i].id);
                 printf("Nome: %s\n", musicas[i].nome);
                 printf("Artista: %s\n", musicas[i].artista);
-                printf("Duracao: %d\n", musicas[i].duracao);
+                printf("Duracao: %d:%02d\n", min, seg);
+                printf("-------------------------\n");
             }
         }
 
@@ -105,71 +147,102 @@ int main() {
                 continue;
             }
 
-            int busca, encontrado = 0;
+            int busca;
+            int encontrado = 0;
 
-            printf("ID: ");
-            scanf("%d", &busca);
+            printf("Digite o ID: ");
+
+            if (scanf("%d", &busca) != 1) {
+                printf("Entrada invalida!\n");
+                while(getchar() != '\n');
+                continue;
+            }
 
             for (int i = 0; i < qtd; i++) {
 
                 if (musicas[i].id == busca) {
 
-                    printf("\nID: %d\n", musicas[i].id);
+                    int min = musicas[i].duracao / 60;
+                    int seg = musicas[i].duracao % 60;
+
+                    printf("\n===== MUSICA ENCONTRADA =====\n");
+                    printf("ID: %04d\n", musicas[i].id);
                     printf("Nome: %s\n", musicas[i].nome);
                     printf("Artista: %s\n", musicas[i].artista);
-                    printf("Duracao: %d\n", musicas[i].duracao);
+                    printf("Duracao: %d:%02d\n", min, seg);
 
                     encontrado = 1;
+                    break;
                 }
             }
 
             if (!encontrado) {
-                printf("Nao encontrada!\n");
+                printf("Musica nao encontrada!\n");
             }
-
         }
-
-        else if (opcao == 4) {
+                else if (opcao == 4) {
 
             if (qtd == 0) {
                 printf("Nenhuma musica cadastrada!\n");
                 continue;
             }
 
-            int busca, encontrado = 0;
+            int busca;
+            int encontrado = 0;
 
-            printf("ID: ");
-            scanf("%d", &busca);
+            printf("Digite o ID da musica: ");
+
+            if (scanf("%d", &busca) != 1) {
+                printf("Entrada invalida!\n");
+                while(getchar() != '\n');
+                continue;
+            }
 
             for (int i = 0; i < qtd; i++) {
 
                 if (musicas[i].id == busca) {
 
+                    int min = musicas[i].duracao / 60;
+                    int seg = musicas[i].duracao % 60;
+
+                    printf("\n===== MUSICA ATUAL =====\n");
+                    printf("ID: %04d\n", musicas[i].id);
+                    printf("Nome: %s\n", musicas[i].nome);
+                    printf("Artista: %s\n", musicas[i].artista);
+                    printf("Duracao: %d:%02d\n", min, seg);
+                    printf("------------------------\n");
+
                     printf("Novo nome: ");
-                    scanf(" %[^\n]", musicas[i].nome);
+                    scanf(" %49[^\n]", musicas[i].nome);
 
                     printf("Novo artista: ");
-                    scanf(" %[^\n]", musicas[i].artista);
+                    scanf(" %49[^\n]", musicas[i].artista);
 
-                    printf("Nova duracao: ");
+                    do {
 
-                    if (scanf("%d", &musicas[i].duracao) != 1 || musicas[i].duracao <= 0) {
-                        printf("Duracao invalida!\n");
-                        while(getchar() != '\n');
-                    }
+                        printf("Nova duracao em segundos: ");
 
-                    else {
-                        printf("Atualizada!\n");
-                    }
+                        if (scanf("%d", &musicas[i].duracao) != 1) {
+                            while(getchar() != '\n');
+                            musicas[i].duracao = -1;
+                        }
+
+                        if (musicas[i].duracao <= 0) {
+                            printf("Duracao invalida!\n");
+                        }
+
+                    } while (musicas[i].duracao <= 0);
+
+                    printf("Musica atualizada com sucesso!\n");
 
                     encontrado = 1;
+                    break;
                 }
             }
 
             if (!encontrado) {
                 printf("ID nao encontrado!\n");
             }
-
         }
 
         else if (opcao == 5) {
@@ -179,35 +252,61 @@ int main() {
                 continue;
             }
 
-            int busca, encontrado = 0;
+            int busca;
+            int encontrado = 0;
+            char confirmar;
 
-            printf("ID: ");
-            scanf("%d", &busca);
+            printf("Digite o ID da musica: ");
+
+            if (scanf("%d", &busca) != 1) {
+                printf("Entrada invalida!\n");
+                while(getchar() != '\n');
+                continue;
+            }
 
             for (int i = 0; i < qtd; i++) {
 
                 if (musicas[i].id == busca) {
 
-                    for (int j = i; j < qtd - 1; j++) {
-                        musicas[j] = musicas[j + 1];
+                    int min = musicas[i].duracao / 60;
+                    int seg = musicas[i].duracao % 60;
+
+                    printf("\n===== MUSICA ENCONTRADA =====\n");
+                    printf("ID: %04d\n", musicas[i].id);
+                    printf("Nome: %s\n", musicas[i].nome);
+                    printf("Artista: %s\n", musicas[i].artista);
+                    printf("Duracao: %d:%02d\n", min, seg);
+                    printf("-----------------------------\n");
+
+                    printf("Remover \"%s\"? (S/N): ", musicas[i].nome);
+                    scanf(" %c", &confirmar);
+
+                    if (confirmar == 'S' || confirmar == 's') {
+
+                        for (int j = i; j < qtd - 1; j++) {
+                            musicas[j] = musicas[j + 1];
+                        }
+
+                        qtd--;
+
+                        printf("Musica removida com sucesso!\n");
+                    }
+                    else {
+                        printf("Remocao cancelada.\n");
                     }
 
-                    qtd--;
-
-                    printf("Removida!\n");
-
                     encontrado = 1;
+                    break;
                 }
             }
 
             if (!encontrado) {
                 printf("ID nao encontrado!\n");
             }
-
         }
 
         else if (opcao == 0) {
-            printf("Saindo...\n");
+            printf("Encerrando aplicativo...\n");
         }
 
         else {
